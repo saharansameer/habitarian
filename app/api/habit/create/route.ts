@@ -36,6 +36,7 @@ export async function POST(request: NextRequest) {
       title: trimmedTitle,
       category,
       frequency,
+      creator: session.userId
     };
 
     const [newHabit] = await db.insert(habits).values(habitDetails).returning();

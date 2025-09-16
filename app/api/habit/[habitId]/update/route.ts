@@ -4,7 +4,7 @@ import { getAuthSession, unauthorized } from "@/lib/auth/session";
 import { db } from "@/lib/db";
 import { habits } from "@/lib/db/schema";
 import { trimAndClean } from "@/lib/utils";
-import { and, eq } from "drizzle-orm";
+import { and, eq, not } from "drizzle-orm";
 
 export async function PATCH(
   request: NextRequest,
@@ -17,12 +17,13 @@ export async function PATCH(
   }
   try {
     const { habitId } = params;
-    const { title } = await request.json();
+    const { title, category, frequency } = await request.json();
 
     const trimmedTitle = trimAndClean(title);
 
     const existingTitle = await db.query.habits.findFirst({
       where: and(
+        not(eq(habits.id, habitId)),
         eq(habits.title, trimmedTitle),
         eq(habits.creator, session.userId)
       ),
@@ -38,7 +39,7 @@ export async function PATCH(
 
     const [updatedHabit] = await db
       .update(habits)
-      .set({ title: trimmedTitle })
+      .set({ title: trimmedTitle, category, frequency, updatedAt: new Date() })
       .where(and(eq(habits.id, habitId), eq(habits.creator, session.userId)))
       .returning();
 
