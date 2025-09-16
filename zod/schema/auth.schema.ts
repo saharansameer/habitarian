@@ -11,6 +11,7 @@ export const signupSchema = z.object({
   password: passwordValidator,
   username: z
     .string()
+    .regex(/^[A-Za-z0-9]+$/, "Only letters and numbers are allowed")
     .min(3, { error: "Username must be 3 characters long" })
     .max(20, { error: "Username must not exceed 20 characters" }),
 });
