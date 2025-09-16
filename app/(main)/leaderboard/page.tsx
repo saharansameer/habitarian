@@ -8,9 +8,14 @@ import {
   TableBody,
   TableCell,
 } from "@/components/ui/table";
-import { EmptyState, LeaderboardFrequency } from "@/components/index";
+import {
+  EmptyState,
+  LeaderboardFrequency,
+  LoadingOverlay,
+} from "@/components/index";
 import { LeaderboardItem } from "@/types";
 import { Separator } from "@/components/ui";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Leaderboard | Habitarian",
@@ -85,7 +90,9 @@ export default function LeaderboardPage(props: PageProps) {
       </div>
 
       <LeaderboardFrequency />
-      <LeaderboardTable {...props} />
+      <Suspense fallback={<LoadingOverlay />}>
+        <LeaderboardTable {...props} />
+      </Suspense>
     </div>
   );
 }

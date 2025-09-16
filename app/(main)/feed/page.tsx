@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
-import { FeedListItem, EmptyState, FollowForm } from "@/components/index";
+import {
+  FeedListItem,
+  EmptyState,
+  FollowForm,
+  LoadingOverlay,
+} from "@/components/index";
 import { FeedItem } from "@/types";
 import { Separator } from "@/components/ui";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Feed | Habitarian",
@@ -53,8 +59,11 @@ export default function FeedPage() {
 
       <div className="flex flex-col gap-y-5">
         <FollowForm />
+
         <Separator orientation="horizontal" />
-        <FeedList />
+        <Suspense fallback={<LoadingOverlay />}>
+          <FeedList />
+        </Suspense>
       </div>
     </div>
   );

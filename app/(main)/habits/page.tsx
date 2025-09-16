@@ -2,10 +2,11 @@ import { HabitCard } from "@/components/index";
 import { headers } from "next/headers";
 import { HabitListItem } from "@/types";
 import type { Metadata } from "next";
-import { EmptyState } from "@/components/index";
+import { EmptyState, LoadingOverlay } from "@/components/index";
 import Link from "next/link";
 import { Button, Separator } from "@/components/ui";
 import { Plus } from "lucide-react";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Habits | Habitarian",
@@ -61,7 +62,9 @@ export default function HabitsPage() {
             Add New Habit
           </Button>
         </Link>
-        <HabitsList />
+        <Suspense fallback={<LoadingOverlay />}>
+          <HabitsList />
+        </Suspense>
       </div>
     </div>
   );
