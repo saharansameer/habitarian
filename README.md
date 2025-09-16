@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Habitarian
 
-## Getting Started
+Habitarian is a web app to track habits. Users can create and manage habits, keep streaks for accountability, follow friends to see their activity, and check a global leaderboard to compare ranks.
 
-First, run the development server:
+---
+
+## Tech Stack
+- **Next.js**
+- **TypeScript**
+- **PostgreSQL**
+- **Drizzle ORM**
+- **Better-Auth**
+- **Tailwind CSS**
+- **shadcn/ui**
+
+---
+
+## Features
+- **Authentication:** Users can Sign in, Sign up and Sign out
+- **Habits:** Create new habits, view existing ones, update habit details and delete habits
+- **Feed:** Can follow other users and see their habit completion activity
+- **Leaderboard:** Ranks users by streaks and active habits.
+- **Frequency:** Assign a frequency to each habit as daily or weekly. Daily habits reset each day, weekly habits reset every week.
+- **Category:** Categories can be assigned to habits and are displayed on the habits dashboard for easy organization.
+
+---
+
+## Environment Variables
+All required environment variables and notes are included in `.env.example`. Copy it and adjust values for your environment.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Local Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Prerequisites:
+- [Node.js v20+](https://nodejs.org/en/download/)
+- [pnpm v10+](https://pnpm.io/installation)
 
-## Learn More
+Steps:
 
-To learn more about Next.js, take a look at the following resources:
+1) Clone the repo to local machine
+```bash
+  git clone https://github.com/saharansameer/habitarian.git
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2) Install dependencies
+```bash
+cd habitarian # Make sure you are in project root
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+pnpm install
+```
 
-## Deploy on Vercel
+3) Run database migrations
+```bash
+# Before running this command, Make sure you had setup DATABASE_URL variable in .env file
+pnpm run db:migrate
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4) Start the dev server
+```bash
+pnpm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+App will run on [`http://localhost:3000`](http://localhost:3000) 
+
+---
+
+## Useful Scripts
+- `pnpm run dev` - start Next.js in dev mode
+- `pnpm run build` - build the app
+- `pnpm run start` - start production server
+- `pnpm run db:migrate` - run Drizzle migrations
+- `pnpm run db:generate` - generate Drizzle migrations (if needed)
+
+---
+
+## Notes
+- Keep `.env` private. Do not commit secrets.
+- See `.env.example` for the complete list of required variables and guidance.
+
+## Deployment
+Fully deployed and live at [`habitarian.vercel.app`](https://habitarian.vercel.app)  
+built by [`Sameer Saharan`](https://sameersaharan.com)
