@@ -5,11 +5,6 @@ import { ArrowLeftFromLine } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "404 Not Found",
-  description: "The page you're looking for does not exist or has been moved.",
-  robots: {
-    index: false,
-    follow: true,
-  },
 };
 
 export default function NotFound() {
