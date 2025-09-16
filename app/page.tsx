@@ -103,7 +103,7 @@ export default function Home() {
                 >
                   portfolio website
                 </Link>
-                . But we aren't gonna talk more about those projects here, so
+                . But we aren&apos;t gonna talk more about those projects here, so
                 lets continue with speaking of Habitarian - Your Go To Habit
                 Tracker, which I built in just 2 days.
               </p>
@@ -167,7 +167,7 @@ export default function Home() {
             Ready to build better habits?
           </h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Join others who've chosen simplicity over complexity. Start tracking
+            Join others who&apos;ve chosen simplicity over complexity. Start tracking
             what matters today.
           </p>
           <Link href="/sign-up">

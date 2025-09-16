@@ -7,7 +7,7 @@ import { and, eq } from "drizzle-orm";
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { habitId: string } }
+  { params }: { params: Promise<{ habitId: string }> }
 ) {
   const session = await getAuthSession(request.headers);
 
@@ -15,7 +15,7 @@ export async function DELETE(
     return unauthorized();
   }
   try {
-    const { habitId } = params;
+    const { habitId } = await params;
 
     const [deletedHabit] = await db
       .delete(habits)

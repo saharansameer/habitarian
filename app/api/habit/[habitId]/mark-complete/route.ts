@@ -8,14 +8,14 @@ import { evaluateCompletion } from "@/lib/utils";
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { habitId: string } }
+  { params }: { params: Promise<{ habitId: string }> }
 ) {
   const session = await getAuthSession(request.headers);
   if (!session) {
     return unauthorized();
   }
   try {
-    const { habitId } = params;
+    const { habitId } = await params;
 
     // Find habit by id
     const habit = await db.query.habits.findFirst({

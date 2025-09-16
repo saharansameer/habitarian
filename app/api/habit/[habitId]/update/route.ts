@@ -8,7 +8,7 @@ import { and, eq, not } from "drizzle-orm";
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { habitId: string } }
+  { params }: { params: Promise<{ habitId: string }> }
 ) {
   const session = await getAuthSession(request.headers);
 
@@ -16,7 +16,7 @@ export async function PATCH(
     return unauthorized();
   }
   try {
-    const { habitId } = params;
+    const { habitId } = await params;
     const { title, category, frequency } = await request.json();
 
     const trimmedTitle = trimAndClean(title);

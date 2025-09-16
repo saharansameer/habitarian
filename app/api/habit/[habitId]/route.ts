@@ -7,7 +7,7 @@ import { and, eq } from "drizzle-orm";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { habitId: string } }
+  { params }: { params: Promise<{ habitId: string }> }
 ) {
   const session = await getAuthSession(request.headers);
   if (!session) {
@@ -15,7 +15,7 @@ export async function GET(
   }
 
   try {
-    const { habitId } = params;
+    const { habitId } = await params;
 
     const habit = await db.query.habits.findFirst({
       where: and(eq(habits.id, habitId), eq(habits.creator, session.userId)),
