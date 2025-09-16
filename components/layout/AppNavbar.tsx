@@ -56,9 +56,7 @@ export function AppNavbar({ authenticated }: AppNavbarProps) {
           {/* Sign in/out buttonn */}
           <div className="hidden lg:flex items-center gap-2">
             {authenticated ? (
-              <Button variant="default" className="px-4 py-2">
-                <LogoutButton />
-              </Button>
+              <LogoutButton />
             ) : (
               <Link href="/sign-in">
                 <Button
@@ -102,13 +100,7 @@ export function AppNavbar({ authenticated }: AppNavbarProps) {
             ))}
 
             {authenticated ? (
-              <Button
-                variant="default"
-                className="w-full px-4 py-2 cursor-pointer font-semibold"
-                onClick={() => setIsOpen(false)}
-              >
-                <LogoutButton />
-              </Button>
+              <LogoutButton />
             ) : (
               <Link href="/sign-in" onClick={() => setIsOpen(false)}>
                 <Button

@@ -42,7 +42,7 @@ export function evaluateCompletion(
     const nextPossibleCompletion = new Date(
       last.getFullYear(),
       last.getMonth(),
-      last.getDate() + 6
+      last.getDate() + 7
     );
     const tomorrowMidnight = new Date(
       now.getFullYear(),

@@ -3,6 +3,7 @@
 import { authClient } from "@/lib/auth/auth-client";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { Button } from "@/components/ui";
 
 export function LogoutButton() {
   const router = useRouter();
@@ -13,11 +14,12 @@ export function LogoutButton() {
     router.refresh();
   };
   return (
-    <button
+    <Button
+      variant="default"
       onClick={onSignOutHandler}
       className="min-w-full min-h-full font-semibold cursor-pointer px-4 py-2"
     >
       Sign out
-    </button>
+    </Button>
   );
 }
