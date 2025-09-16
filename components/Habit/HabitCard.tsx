@@ -9,7 +9,7 @@ import {
   CircleCheckBig,
   Trash2,
   Pencil,
-  DiamondPlus
+  DiamondPlus,
 } from "lucide-react";
 import {
   AlertDialog,
@@ -23,6 +23,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface HabitCardProps {
   habit: HabitListItem;
@@ -31,38 +32,45 @@ interface HabitCardProps {
 
 export function HabitCard({ habit }: HabitCardProps) {
   const disableComplete = habit.completed;
+  const router = useRouter();
 
   const onMarkComplete = async () => {
+    const toastId = toast.loading("Marking as completed...");
     try {
       const res = await fetch(`/api/habit/${habit.id}/mark-complete`, {
         method: "POST",
       });
       const { success, message } = await res.json();
       if (!success) {
-        toast.error(message);
+        toast.error(message, { id: toastId });
         return;
       }
 
-      toast.success(message);
+      toast.success(message, { id: toastId });
     } catch {
-      toast.error("Something went wrong");
+      toast.error("Something went wrong", { id: toastId });
+    } finally {
+      router.refresh();
     }
   };
 
   const onDeleteHandler = async () => {
+    const toastId = toast.loading("Deleting habit...");
     try {
       const res = await fetch(`/api/habit/${habit.id}/delete`, {
         method: "DELETE",
       });
       const { success, message } = await res.json();
       if (!success) {
-        toast.error(message);
+        toast.error(message, { id: toastId });
         return;
       }
 
-      toast.success(message);
+      toast.success(message, { id: toastId });
     } catch {
-      toast.error("Something went wrong");
+      toast.error("Something went wrong", { id: toastId });
+    } finally {
+      router.refresh();
     }
   };
 

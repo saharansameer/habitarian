@@ -3,6 +3,9 @@ import { headers } from "next/headers";
 import { HabitListItem } from "@/types";
 import type { Metadata } from "next";
 import { EmptyState } from "@/components/index";
+import Link from "next/link";
+import { Button, Separator } from "@/components/ui";
+import { Plus } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Habits | Habitarian",
@@ -46,8 +49,20 @@ async function HabitsList() {
 export default function HabitsPage() {
   return (
     <div className="mt-4 space-y-5 mx-auto max-w-xl">
-      <h1 className="font-bold text-2xl">Your Habits</h1>
-      <HabitsList />
+      <div className="space-y-2">
+        <h1 className="font-bold text-2xl">Habits</h1>
+        <Separator orientation="horizontal" />
+      </div>
+
+      <div className="flex flex-col gap-y-4">
+        <Link href={"/habits/new"}>
+          <Button variant={"default"} className="font-semibold cursor-pointer">
+            <Plus />
+            Add New Habit
+          </Button>
+        </Link>
+        <HabitsList />
+      </div>
     </div>
   );
 }

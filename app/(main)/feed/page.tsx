@@ -51,8 +51,9 @@ export default function FeedPage() {
         <Separator orientation="horizontal" />
       </div>
 
-      <div className="flex flex-col gap-y-4">
+      <div className="flex flex-col gap-y-5">
         <FollowForm />
+        <Separator orientation="horizontal" />
         <FeedList />
       </div>
     </div>

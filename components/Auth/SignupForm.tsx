@@ -18,6 +18,7 @@ export function SignupForm() {
     handleSubmit,
     formState: { errors, isSubmitting, isSubmitSuccessful },
     setError,
+    setValue,
   } = useForm<SignupSchemaInputs>({
     resolver: zodResolver(signupSchema),
     mode: "onSubmit",
@@ -68,6 +69,15 @@ export function SignupForm() {
             type="text"
             placeholder="Enter a username"
             {...register("username")}
+            onChange={(e) =>
+              setValue(
+                "username",
+                e.target.value.replace(/[^A-Za-z0-9]/g, ""),
+                {
+                  shouldValidate: false,
+                }
+              )
+            }
           />
         </div>
 

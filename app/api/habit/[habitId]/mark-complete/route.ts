@@ -3,7 +3,7 @@ import type { BaseResponse } from "@/types";
 import { getAuthSession, unauthorized } from "@/lib/auth/session";
 import { db } from "@/lib/db";
 import { habits, completions } from "@/lib/db/schema";
-import { and, desc, eq } from "drizzle-orm";
+import { and, desc, eq, sql } from "drizzle-orm";
 import { evaluateCompletion } from "@/lib/utils";
 
 export async function POST(
@@ -49,7 +49,10 @@ export async function POST(
       });
 
       // Add +1 streak
-      await db.update(habits).set({ streak: habit.streak + 1 });
+      await db
+        .update(habits)
+        .set({ streak: sql`${habits.streak} + 1` })
+        .where(and(eq(habits.id, habitId), eq(habits.creator, session.userId)));
 
       return NextResponse.json<BaseResponse>(
         { success: true, message: "Marked as Completed!" },
@@ -87,7 +90,10 @@ export async function POST(
         .returning();
 
       // Add +1 streak
-      await db.update(habits).set({ streak: habit.streak + 1 });
+      await db
+        .update(habits)
+        .set({ streak: sql`${habits.streak} + 1` })
+        .where(and(eq(habits.id, habitId), eq(habits.creator, session.userId)));
 
       return NextResponse.json<BaseResponse>(
         { success: true, message: "Marked as Completed!" },
