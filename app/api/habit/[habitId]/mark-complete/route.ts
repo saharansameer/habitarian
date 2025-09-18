@@ -66,12 +66,18 @@ export async function POST(
       habit.frequency
     );
 
-    // Reset streak
     if (!completed && !streakAlive) {
+      // Reset streak
       await db
         .update(habits)
         .set({ streak: 1 })
         .where(and(eq(habits.id, habitId), eq(habits.creator, session.userId)));
+
+      // Mark completion
+      await db.insert(completions).values({
+        habitId,
+        creatorId: session.userId,
+      });
 
       return NextResponse.json<BaseResponse>(
         { success: true, message: "Streak Reset" },
@@ -81,13 +87,10 @@ export async function POST(
 
     if (!completed && streakAlive) {
       // Mark completion
-      await db
-        .insert(completions)
-        .values({
-          habitId,
-          creatorId: session.userId,
-        })
-        .returning();
+      await db.insert(completions).values({
+        habitId,
+        creatorId: session.userId,
+      });
 
       // Add +1 streak
       await db

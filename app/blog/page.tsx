@@ -45,10 +45,10 @@ export default function HabitarianBlog() {
           my own buttons and inputs would have also consumed time.
         </p>
         <p className="text-foreground/80">
-          For the database, I chose PostgreSQL with Drizzle ORM and Neon DB.
-          Setting up the project was fast because I&apos;m familiar with this
+          For the database, I chose PostgreSQL with Drizzle ORM and Neon.
+          Setting up the project was smooth because I&apos;m familiar with this
           tech stack and had built and shipped some full stack projects before.
-          After setting up the project, I wrote schemas (it was so smooth), then
+          After setting up the project, I wrote schemas, then
           worked on auth logic. Yeah, I was using Better-Auth, but it
           doesn&apos;t give everything out of the box, we have to create a
           proper setup. Then I worked on API endpoints (backend part) and
